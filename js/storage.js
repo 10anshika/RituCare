@@ -228,7 +228,7 @@ class StorageManager {
     // Load sample data for demo
     loadSampleData() {
         if (confirm('This will replace your current data with sample data. Continue?')) {
-            fetch('../data/sample-data.json')
+            fetch('data/sample-data.json')
                 .then(response => response.json())
                 .then(sampleData => {
                     this.saveAllData(sampleData);

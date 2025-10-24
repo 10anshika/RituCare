@@ -10,7 +10,7 @@ class NutritionManager {
     // Load nutrition database
     async loadNutritionData() {
         try {
-            const response = await fetch('../data/nutrition-db.json');
+            const response = await fetch('data/nutrition-db.json');
             this.nutritionData = await response.json();
         } catch (error) {
             console.error('Error loading nutrition data:', error);

@@ -133,29 +133,64 @@ class RituCareApp {
         // Load cycle info
         const cycleInfo = document.getElementById('cycle-info');
         if (cycleInfo) {
-            const cycleData = cycleManager.getCurrentCycleInfo();
-            cycleInfo.innerHTML = cycleData;
+            const currentPhase = cycleManager.getCurrentPhase();
+            const nextPeriod = cycleManager.getDaysUntilNextPeriod();
+            const nextOvulation = cycleManager.getDaysUntilOvulation();
+
+            let html = '';
+
+            if (currentPhase) {
+                html += `<p><strong>Current Phase:</strong> ${currentPhase.phase} (Day ${currentPhase.day})</p>`;
+            }
+
+            if (nextPeriod !== null) {
+                html += `<p><strong>Next Period:</strong> ${nextPeriod === 0 ? 'Today' : `In ${nextPeriod} days`}</p>`;
+            }
+
+            if (nextOvulation !== null && nextOvulation > 0) {
+                html += `<p><strong>Ovulation:</strong> In ${nextOvulation} days</p>`;
+            }
+
+            if (!html) {
+                html = '<p>Log your first period to see cycle information.</p>';
+            }
+
+            cycleInfo.innerHTML = html;
         }
 
         // Load PCOS risk
         const pcosRisk = document.getElementById('pcos-risk');
         if (pcosRisk) {
-            const riskData = pcosManager.getRiskAssessment();
-            pcosRisk.innerHTML = riskData;
+            const latestAssessment = pcosManager.getLatestAssessment();
+
+            if (latestAssessment) {
+                pcosRisk.innerHTML = `
+                    <p><strong>Risk Level:</strong> ${latestAssessment.level}</p>
+                    <p>Score: ${latestAssessment.score}</p>
+                    <small>Last assessed: ${cycleManager.formatDate(latestAssessment.date)}</small>
+                `;
+            } else {
+                pcosRisk.innerHTML = '<p>No assessment yet. Take the PCOS assessment to view your risk level.</p>';
+            }
         }
 
         // Load nutrition tip
         const nutritionTip = document.getElementById('nutrition-tip');
         if (nutritionTip) {
-            const tip = nutritionManager.getDailyTip();
-            nutritionTip.innerHTML = tip;
+            const suggestion = nutritionManager.getDailySuggestion();
+
+            if (suggestion) {
+                nutritionTip.innerHTML = `<p>${suggestion.suggestions[0]}</p>`;
+            } else {
+                nutritionTip.innerHTML = '<p>Log cycles to get personalized nutrition tips.</p>';
+            }
         }
 
         // Load mini calendar
         const miniCalendar = document.getElementById('mini-calendar');
         if (miniCalendar) {
-            const calendar = cycleManager.generateMiniCalendar();
-            miniCalendar.innerHTML = calendar;
+            const now = new Date();
+            chartsManager.createMiniCalendar('mini-calendar', now.getFullYear(), now.getMonth());
         }
     }
 
@@ -164,22 +199,53 @@ class RituCareApp {
         // Load calendar
         const periodCalendar = document.getElementById('period-calendar');
         if (periodCalendar) {
-            const calendar = cycleManager.generateCalendar();
-            periodCalendar.innerHTML = calendar;
+            const now = new Date();
+            chartsManager.createMiniCalendar('period-calendar', now.getFullYear(), now.getMonth());
         }
 
         // Load cycle stats
         const cycleStats = document.getElementById('cycle-stats');
         if (cycleStats) {
-            const stats = cycleManager.getCycleStatistics();
-            cycleStats.innerHTML = stats;
+            const stats = cycleManager.getCycleStats();
+
+            if (stats) {
+                cycleStats.innerHTML = `
+                    <p><strong>Average Cycle Length:</strong> ${stats.averageLength} days</p>
+                    <p><strong>Regularity:</strong> ${stats.regularity}</p>
+                    <p><strong>Cycles Tracked:</strong> ${stats.totalCycles}</p>
+                `;
+            } else {
+                cycleStats.innerHTML = '<p>Log more cycles to see statistics.</p>';
+            }
         }
 
         // Load recent periods
         const recentPeriods = document.getElementById('recent-periods');
         if (recentPeriods) {
-            const periods = cycleManager.getRecentPeriods();
-            recentPeriods.innerHTML = periods;
+            const cycles = cycleManager.getCycles().slice(-5); // Last 5 periods
+
+            if (cycles.length === 0) {
+                recentPeriods.innerHTML = '<p>No periods logged yet.</p>';
+                return;
+            }
+
+            let html = '';
+            cycles.forEach(cycle => {
+                const endDate = cycle.end ? cycleManager.formatDate(cycle.end) : 'Ongoing';
+                html += `
+                    <div class="period-log">
+                        <div class="dates">
+                            ${cycleManager.formatDate(cycle.start)} - ${endDate}
+                        </div>
+                        <div class="flow ${cycle.flow}">${cycle.flow}</div>
+                        <div class="symptoms">
+                            ${cycle.symptoms && cycle.symptoms.length > 0 ? cycle.symptoms.join(', ') : 'No symptoms logged'}
+                        </div>
+                    </div>
+                `;
+            });
+
+            recentPeriods.innerHTML = html;
         }
 
         // Initialize charts
@@ -198,6 +264,12 @@ class RituCareApp {
         if (assessmentResults) {
             const results = pcosManager.getAssessmentResults();
             assessmentResults.innerHTML = results;
+        }
+
+        // Load assessment history
+        const assessmentHistory = document.getElementById('assessment-history');
+        if (assessmentHistory) {
+            pcosManager.displayAssessmentHistory();
         }
     }
 
@@ -282,13 +354,13 @@ class RituCareApp {
         // Cycle trend chart
         const cycleTrendCanvas = document.getElementById('cycle-trend-chart');
         if (cycleTrendCanvas) {
-            cycleManager.initializeCycleTrendChart();
+            chartsManager.createCycleTrendChart('cycle-trend-chart');
         }
 
         // Symptom frequency chart
         const symptomChartCanvas = document.getElementById('symptom-frequency-chart');
         if (symptomChartCanvas) {
-            cycleManager.initializeSymptomChart();
+            chartsManager.createSymptomFrequencyChart('symptom-frequency-chart');
         }
     }
 
