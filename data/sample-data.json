@@ -1,0 +1,110 @@
+{
+  "profile": {
+    "name": "Demo User",
+    "age": 28,
+    "height_cm": 165,
+    "weight_kg": 65,
+    "dietary": {
+      "vegetarian": false,
+      "vegan": false,
+      "dairy_free": false,
+      "gluten_free": false
+    },
+    "notification_prefs": {
+      "period_reminders": true,
+      "ovulation_reminders": true,
+      "nutrition_reminders": true
+    }
+  },
+  "cycles": [
+    {
+      "id": 1,
+      "start": "2023-09-01",
+      "end": "2023-09-05",
+      "flow": "medium",
+      "symptoms": ["cramps", "fatigue"],
+      "date_logged": "2023-09-01T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "start": "2023-09-28",
+      "end": "2023-10-02",
+      "flow": "medium",
+      "symptoms": ["cramps", "bloating"],
+      "date_logged": "2023-09-28T10:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "start": "2023-10-25",
+      "end": "2023-10-29",
+      "flow": "light",
+      "symptoms": ["mood_swings"],
+      "date_logged": "2023-10-25T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "start": "2023-11-21",
+      "end": "2023-11-25",
+      "flow": "medium",
+      "symptoms": ["cramps", "headache"],
+      "date_logged": "2023-11-21T10:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "start": "2023-12-18",
+      "end": "2023-12-22",
+      "flow": "heavy",
+      "symptoms": ["cramps", "fatigue", "bloating"],
+      "date_logged": "2023-12-18T10:00:00.000Z"
+    }
+  ],
+  "assessments": [
+    {
+      "id": 1,
+      "age": 28,
+      "height": 165,
+      "weight": 65,
+      "irregular_cycles": false,
+      "irregular_periods": false,
+      "hirsutism": false,
+      "acne": true,
+      "weight_gain": false,
+      "hair_loss": false,
+      "fertility_difficulty": false,
+      "mood_changes": true,
+      "skin_darkening": false,
+      "score": 2.5,
+      "bmi": 23.9,
+      "level": "Low",
+      "factors": ["Acne", "Mood changes"],
+      "recommendations": [
+        "Maintain healthy lifestyle",
+        "Regular exercise and balanced diet",
+        "Monitor cycle regularity",
+        "Consider annual check-ups"
+      ],
+      "lifestyleTips": [
+        "Consult dermatologist for hormonal acne or hair concerns",
+        "Practice stress management techniques",
+        "Consider adequate sleep and nutrition for mood stability"
+      ],
+      "date": "2023-10-01T10:00:00.000Z"
+    }
+  ],
+  "nutrition_prefs": {
+    "filters": [],
+    "dislikes": ["nuts", "shellfish"]
+  },
+  "settings": {
+    "use_free_api": false,
+    "api_keys": {
+      "usda": "",
+      "edamam": {
+        "id": "",
+        "key": ""
+      }
+    },
+    "prediction_window": 6,
+    "cycle_length": 28
+  }
+}

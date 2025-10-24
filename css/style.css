@@ -1,0 +1,360 @@
+/* RituCare - Women's Health App Styles */
+
+/* CSS Variables for Theming */
+:root {
+    /* Colors */
+    --primary-teal: #4ecdc4;
+    --secondary-lavender: #d4a5ff;
+    --accent-sage: #95e1d3;
+    --neutral-cream: #fefefe;
+    --neutral-light: #f8f9fa;
+    --neutral-dark: #343a40;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* Typography */
+    --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-family-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Layout */
+    --max-content-width: 1200px;
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --neutral-cream: #1a1a1a;
+    --neutral-light: #2d2d2d;
+    --neutral-dark: #f8f9fa;
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --border-color: #495057;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--neutral-cream);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+h5 { font-size: var(--font-size-base); }
+h6 { font-size: var(--font-size-sm); }
+
+p {
+    margin-bottom: var(--spacing-md);
+}
+
+a {
+    color: var(--primary-teal);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-sage);
+    text-decoration: underline;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--neutral-light) !important;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-teal) !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-primary) !important;
+    font-weight: var(--font-weight-medium);
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--primary-teal) !important;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Main Content */
+main {
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-xxl);
+    min-height: calc(100vh - 200px);
+}
+
+.container {
+    max-width: var(--max-content-width);
+}
+
+/* Cards */
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    background-color: var(--neutral-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.card-header {
+    background-color: var(--neutral-light);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0 !important;
+    padding: var(--spacing-lg);
+}
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+.card-title {
+    color: var(--text-primary);
+    margin-bottom: 0;
+}
+
+/* Buttons */
+.btn {
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-sm) var(--spacing-md);
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-teal);
+    border-color: var(--primary-teal);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-sage);
+    border-color: var(--accent-sage);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-lavender);
+    border-color: var(--secondary-lavender);
+}
+
+.btn-outline-primary {
+    color: var(--primary-teal);
+    border-color: var(--primary-teal);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-teal);
+    border-color: var(--primary-teal);
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Forms */
+.form-control {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+    background-color: var(--neutral-cream);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25);
+}
+
+.form-label {
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-teal);
+    border-color: var(--primary-teal);
+}
+
+.form-check-label {
+    color: var(--text-secondary);
+}
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: var(--border-radius);
+    background-color: var(--border-color);
+}
+
+.progress-bar {
+    background-color: var(--primary-teal);
+    border-radius: var(--border-radius);
+}
+
+/* Modals */
+.modal-content {
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--neutral-light);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.modal-body {
+    background-color: var(--neutral-cream);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+    background-color: var(--neutral-light);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+}
+
+/* Accordion */
+.accordion-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius) !important;
+    margin-bottom: var(--spacing-sm);
+}
+
+.accordion-button {
+    background-color: var(--neutral-light);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--border-radius) !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--primary-teal);
+    color: white;
+}
+
+.accordion-body {
+    background-color: var(--neutral-cream);
+}
+
+/* Footer */
+footer {
+    background-color: var(--neutral-light);
+    border-top: 1px solid var(--border-color);
+    padding: var(--spacing-lg) 0;
+    margin-top: var(--spacing-xxl);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+        margin-top: var(--spacing-md);
+    }
+
+    .card-body {
+        padding: var(--spacing-md);
+    }
+
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: var(--spacing-sm);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus States */
+.btn:focus,
+.form-control:focus,
+.form-check-input:focus {
+    outline: 2px solid var(--primary-teal);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-teal: #00ffff;
+        --secondary-lavender: #ff00ff;
+        --accent-sage: #00ff00;
+        --border-color: #ffffff;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .btn,
+    footer {
+        display: none !important;
+    }
+
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+}
