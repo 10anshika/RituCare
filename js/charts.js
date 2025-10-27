@@ -383,13 +383,21 @@ class ChartsManager {
         let html = '';
         symptoms.forEach(symptom => {
             html += `
-                <div class="symptom-chip" data-symptom="${symptom.id}" onclick="toggleSymptom('${symptom.id}')">
+                <div class="symptom-chip" data-symptom="${symptom.id}" onclick="chartsManager.toggleSymptom('${symptom.id}')">
                     ${symptom.label}
                 </div>
             `;
         });
 
         container.innerHTML = html;
+    }
+
+    // Toggle symptom selection
+    toggleSymptom(symptom) {
+        const chip = document.querySelector(`[data-symptom="${symptom}"]`);
+        if (chip) {
+            chip.classList.toggle('active');
+        }
     }
 
     // Create empty state illustration

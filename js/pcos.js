@@ -224,11 +224,15 @@ class PCOSManager {
         const profile = storage.getData('profile');
 
         if (profile.age) document.getElementById('age').value = profile.age;
-        if (profile.height_cm) document.getElementById('height').value = profile.height_cm;
-        if (profile.weight_kg) document.getElementById('weight').value = profile.weight_kg;
+        if (profile.height) document.getElementById('height').value = profile.height;
+        if (profile.weight) document.getElementById('weight').value = profile.weight;
 
         // Calculate and display BMI
         this.updateBMIDisplay();
+
+        // Add BMI calculation on input change
+        document.getElementById('height')?.addEventListener('input', () => this.updateBMIDisplay());
+        document.getElementById('weight')?.addEventListener('input', () => this.updateBMIDisplay());
     }
 
     // Update BMI display
