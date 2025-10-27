@@ -396,7 +396,7 @@ class ChartsManager {
     toggleSymptom(symptom) {
         const chip = document.querySelector(`[data-symptom="${symptom}"]`);
         if (chip) {
-            chip.classList.toggle('active');
+            chip.classList.toggle('selected');
         }
     }
 

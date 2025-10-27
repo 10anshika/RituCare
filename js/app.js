@@ -504,7 +504,7 @@ class RituCareApp {
 
     getSelectedSymptoms() {
         const selectedSymptoms = [];
-        document.querySelectorAll('#symptom-chips .symptom-chip.active').forEach(chip => {
+        document.querySelectorAll('#symptom-chips .symptom-chip.selected').forEach(chip => {
             selectedSymptoms.push(chip.dataset.symptom);
         });
         return selectedSymptoms;
