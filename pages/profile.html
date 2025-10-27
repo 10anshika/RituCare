@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile & Settings - RituCare</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i data-feather="heart" class="me-2"></i>
+                RituCare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tracker.html">Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pcos.html">PCOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nutrition.html">Nutrition</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-5 pt-4">
+        <h1 class="mb-4">
+            <i data-feather="user" class="me-2"></i>
+            Profile & Settings
+        </h1>
+
+        <!-- Personal Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Personal Information</h5>
+            </div>
+            <div class="card-body">
+                <form id="profile-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="profile-name" class="form-label">Name (optional)</label>
+                            <input type="text" class="form-control" id="profile-name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="profile-age" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="profile-age" min="13" max="100">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="profile-height" class="form-label">Height (cm)</label>
+                            <input type="number" class="form-control" id="profile-height" min="100" max="250">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="profile-weight" class="form-label">Weight (kg)</label>
+                            <input type="number" class="form-control" id="profile-weight" min="30" max="300">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Cycle Preferences -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Cycle Preferences</h5>
+            </div>
+            <div class="card-body">
+                <form id="cycle-prefs-form">
+                    <div class="mb-3">
+                        <label for="prediction-window" class="form-label">Prediction Window (cycles to average)</label>
+                        <input type="number" class="form-control" id="prediction-window" min="3" max="12" value="6">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cycle-length" class="form-label">Average Cycle Length (days)</label>
+                        <input type="number" class="form-control" id="cycle-length" min="21" max="45" value="28">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveCyclePrefs()">Save Preferences</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dietary Preferences -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Dietary Preferences</h5>
+            </div>
+            <div class="card-body">
+                <form id="dietary-prefs-form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="vegetarian">
+                                <label class="form-check-label" for="vegetarian">
+                                    Vegetarian
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="vegan">
+                                <label class="form-check-label" for="vegan">
+                                    Vegan
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="dairy-free">
+                                <label class="form-check-label" for="dairy-free">
+                                    Dairy-free
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gluten-free">
+                                <label class="form-check-label" for="gluten-free">
+                                    Gluten-free
+                                </label>
+                            </div>
+                            <label for="dislikes" class="form-label">Food Dislikes/Allergies</label>
+                            <input type="text" class="form-control" id="dislikes" placeholder="e.g., nuts, shellfish">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveDietaryPrefs()">Save Preferences</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Feature Flags -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Optional Features</h5>
+            </div>
+            <div class="card-body">
+                <form id="feature-flags-form">
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="use-free-api">
+                            <label class="form-check-label" for="use-free-api">
+                                Enable Free APIs (Menstrual Cycle API, Nutrition APIs)
+                            </label>
+                        </div>
+                        <small class="text-muted">Requires API keys. App works fully offline without this.</small>
+                    </div>
+                    <div id="api-keys-section" style="display: none;">
+                        <h6>API Keys</h6>
+                        <div class="mb-3">
+                            <label for="usda-api-key" class="form-label">USDA API Key (optional)</label>
+                            <input type="password" class="form-control" id="usda-api-key" placeholder="Enter USDA API key">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="edamam-app-id" class="form-label">Edamam App ID (optional)</label>
+                                <input type="password" class="form-control" id="edamam-app-id" placeholder="Enter Edamam App ID">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="edamam-app-key" class="form-label">Edamam App Key (optional)</label>
+                                <input type="password" class="form-control" id="edamam-app-key" placeholder="Enter Edamam App Key">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveFeatureFlags()">Save Settings</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Data Management -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Data Management</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">All data is stored locally on your device. You can export your data as JSON or import from a previous export.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-primary w-100 mb-2" onclick="exportData()">
+                            <i data-feather="download" class="me-1"></i>
+                            Export Data
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-secondary w-100 mb-2" onclick="importData()">
+                            <i data-feather="upload" class="me-1"></i>
+                            Import Data
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <button class="btn btn-outline-danger" onclick="resetData()">
+                    <i data-feather="trash-2" class="me-1"></i>
+                    Reset All Data
+                </button>
+                <small class="text-muted d-block mt-1">This will permanently delete all your data. Export first if you want to keep it.</small>
+            </div>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Notifications</h5>
+            </div>
+            <div class="card-body">
+                <form id="notification-prefs-form">
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="period-reminders">
+                        <label class="form-check-label" for="period-reminders">
+                            Period reminders
+                        </label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="ovulation-reminders">
+                        <label class="form-check-label" for="ovulation-reminders">
+                            Ovulation reminders
+                        </label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="nutrition-reminders">
+                        <label class="form-check-label" for="nutrition-reminders">
+                            Nutrition tips
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveNotificationPrefs()">Save Preferences</button>
+                </form>
+                <small class="text-muted">Notifications are local only and work when the app is open.</small>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2023 RituCare. All data stays on your device.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/storage.js"></script>
+    <script src="../js/cycle.js"></script>
+    <script src="../js/pcos.js"></script>
+    <script src="../js/nutrition.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>
