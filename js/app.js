@@ -254,37 +254,98 @@ class RituCareApp {
 
     // PCOS functions
     loadPCOSData() {
-        const assessmentQuestions = document.getElementById('assessment-questions');
-        if (assessmentQuestions) {
-            const questions = pcosManager.generateAssessmentForm();
-            assessmentQuestions.innerHTML = questions;
-        }
-
-        const assessmentResults = document.getElementById('assessment-results');
-        if (assessmentResults) {
-            const results = pcosManager.getAssessmentResults();
-            assessmentResults.innerHTML = results;
-        }
+        // Populate assessment form with profile data
+        pcosManager.populateAssessmentForm();
 
         // Load assessment history
-        const assessmentHistory = document.getElementById('assessment-history');
-        if (assessmentHistory) {
-            pcosManager.displayAssessmentHistory();
-        }
+        pcosManager.displayAssessmentHistory();
     }
 
     // Nutrition functions
     loadNutritionData() {
-        const nutritionTips = document.getElementById('nutrition-tips');
-        if (nutritionTips) {
-            const tips = nutritionManager.getNutritionTips();
-            nutritionTips.innerHTML = tips;
+        // Update current phase
+        const currentPhaseEl = document.getElementById('current-phase');
+        if (currentPhaseEl) {
+            const phase = cycleManager.getCurrentPhase();
+            if (phase) {
+                currentPhaseEl.innerHTML = `
+                    <div class="phase-indicator ${phase.phase}">
+                        ${nutritionManager.getPhaseDisplayName(phase.phase)}
+                    </div>
+                    <p>Day ${phase.day} of your cycle</p>
+                `;
+            } else {
+                currentPhaseEl.innerHTML = '<p>Log your cycle to see current phase.</p>';
+            }
         }
 
-        const mealSuggestions = document.getElementById('meal-suggestions');
-        if (mealSuggestions) {
-            const suggestions = nutritionManager.getMealSuggestions();
-            mealSuggestions.innerHTML = suggestions;
+        // Update daily suggestion
+        const dailySuggestionEl = document.getElementById('daily-suggestion');
+        if (dailySuggestionEl) {
+            const suggestion = nutritionManager.getDailySuggestion();
+            if (suggestion) {
+                dailySuggestionEl.innerHTML = `
+                    <ul>
+                        ${suggestion.suggestions.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                dailySuggestionEl.innerHTML = '<p>Log cycles to get daily nutrition suggestions.</p>';
+            }
+        }
+
+        // Update meal plan
+        const mealPlanEl = document.getElementById('meal-plan');
+        if (mealPlanEl) {
+            const mealPlan = nutritionManager.getMealPlan();
+            if (mealPlan) {
+                mealPlanEl.innerHTML = `
+                    <div class="meal-item">
+                        <div class="meal-item-icon">🌅</div>
+                        <div class="meal-item-content">
+                            <h5>Breakfast</h5>
+                            <p>${mealPlan.meals.breakfast}</p>
+                        </div>
+                    </div>
+                    <div class="meal-item">
+                        <div class="meal-item-icon">☀️</div>
+                        <div class="meal-item-content">
+                            <h5>Lunch</h5>
+                            <p>${mealPlan.meals.lunch}</p>
+                        </div>
+                    </div>
+                    <div class="meal-item">
+                        <div class="meal-item-icon">🌆</div>
+                        <div class="meal-item-content">
+                            <h5>Dinner</h5>
+                            <p>${mealPlan.meals.dinner}</p>
+                        </div>
+                    </div>
+                    <div class="meal-item">
+                        <div class="meal-item-icon">🍪</div>
+                        <div class="meal-item-content">
+                            <h5>Snacks</h5>
+                            <p>${mealPlan.meals.snacks}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                mealPlanEl.innerHTML = '<p>Log cycles to get meal plan suggestions.</p>';
+            }
+        }
+
+        // Update shopping list
+        const shoppingListEl = document.getElementById('shopping-list');
+        if (shoppingListEl) {
+            const shoppingList = nutritionManager.getShoppingList();
+            if (shoppingList.length > 0) {
+                shoppingListEl.innerHTML = shoppingList.map(item => `
+                    <div class="shopping-item">
+                        <input type="checkbox" id="item-${item.item}" ${item.checked ? 'checked' : ''}>
+                        <label for="item-${item.item}">${item.item}</label>
+                    </div>
+                `).join('');
+            }
         }
     }
 
@@ -406,7 +467,7 @@ class RituCareApp {
             // Populate symptom chips
             const symptomChips = document.getElementById('symptom-chips');
             if (symptomChips) {
-                symptomChips.innerHTML = cycleManager.generateSymptomChips();
+                chartsManager.createSymptomChips('symptom-chips');
             }
             this.logPeriodModal.show();
         }
@@ -414,19 +475,19 @@ class RituCareApp {
 
     savePeriod() {
         const periodData = {
-            startDate: document.getElementById('period-start')?.value,
-            endDate: document.getElementById('period-end')?.value,
-            flowIntensity: document.getElementById('flow-intensity')?.value,
+            start: document.getElementById('period-start')?.value,
+            end: document.getElementById('period-end')?.value || null,
+            flow: document.getElementById('flow-intensity')?.value,
             symptoms: this.getSelectedSymptoms(),
             loggedAt: new Date().toISOString()
         };
 
-        if (!periodData.startDate) {
+        if (!periodData.start) {
             this.showAlert('Please select a start date', 'danger');
             return;
         }
 
-        cycleManager.savePeriod(periodData);
+        storage.addCycle(periodData);
 
         // Close modal and refresh data
         if (this.logPeriodModal) {
@@ -450,7 +511,17 @@ class RituCareApp {
     }
 
     calculatePCOSRisk() {
-        pcosManager.calculateRisk();
+        const formData = pcosManager.getAssessmentFormData();
+        const errors = pcosManager.validateAssessmentData(formData);
+
+        if (errors.length > 0) {
+            this.showAlert('Please fix the following errors:\n' + errors.join('\n'), 'danger');
+            return;
+        }
+
+        const assessment = pcosManager.saveAssessment(formData);
+        pcosManager.displayAssessmentResults(assessment);
+
         this.loadPCOSData();
         this.loadDashboardData();
         this.showAlert('PCOS assessment completed!', 'success');
