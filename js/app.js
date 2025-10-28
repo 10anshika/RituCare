@@ -196,11 +196,26 @@ class RituCareApp {
 
     // Tracker functions
     loadTrackerData() {
-        // Load calendar
+        // Load calendar - show month of last period or current month
         const periodCalendar = document.getElementById('period-calendar');
         if (periodCalendar) {
-            const now = new Date();
-            chartsManager.createMiniCalendar('period-calendar', now.getFullYear(), now.getMonth());
+            const cycles = cycleManager.getCycles();
+            let year, month;
+
+            if (cycles.length > 0) {
+                // Show month of the last logged period
+                const lastCycle = cycles[cycles.length - 1];
+                const lastPeriodDate = new Date(lastCycle.start);
+                year = lastPeriodDate.getFullYear();
+                month = lastPeriodDate.getMonth();
+            } else {
+                // No periods logged, show current month
+                const now = new Date();
+                year = now.getFullYear();
+                month = now.getMonth();
+            }
+
+            chartsManager.createMiniCalendar('period-calendar', year, month);
         }
 
         // Load cycle stats
