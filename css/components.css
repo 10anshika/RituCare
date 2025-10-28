@@ -38,18 +38,18 @@
 }
 
 .calendar-day.period {
-    background-color: var(--secondary-lavender);
+    background-color: var(--accent-red);
     color: white;
 }
 
 .calendar-day.predicted {
-    background-color: var(--accent-sage);
-    color: var(--text-primary);
-    opacity: 0.7;
+    background-color: #f59e0b;
+    color: white;
+    opacity: 0.8;
 }
 
 .calendar-day.fertile {
-    border: 2px solid var(--primary-blue);
+    border: 2px solid #10b981;
 }
 
 /* Symptom Chips */
