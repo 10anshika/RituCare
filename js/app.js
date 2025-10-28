@@ -186,11 +186,26 @@ class RituCareApp {
             }
         }
 
-        // Load mini calendar
+        // Load mini calendar - show month of last period or current month
         const miniCalendar = document.getElementById('mini-calendar');
         if (miniCalendar) {
-            const now = new Date();
-            chartsManager.createMiniCalendar('mini-calendar', now.getFullYear(), now.getMonth());
+            const cycles = cycleManager.getCycles();
+            let year, month;
+
+            if (cycles.length > 0) {
+                // Show month of the last logged period
+                const lastCycle = cycles[cycles.length - 1];
+                const lastPeriodDate = new Date(lastCycle.start);
+                year = lastPeriodDate.getFullYear();
+                month = lastPeriodDate.getMonth();
+            } else {
+                // No periods logged, show current month
+                const now = new Date();
+                year = now.getFullYear();
+                month = now.getMonth();
+            }
+
+            chartsManager.createMiniCalendar('mini-calendar', year, month);
         }
     }
 
