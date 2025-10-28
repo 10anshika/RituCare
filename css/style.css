@@ -536,7 +536,7 @@ footer {
 /* High Contrast Mode */
 @media (prefers-contrast: high) {
     :root {
-        --primary-teal: #00ffff;
+        --primary-blue: #00ffff;
         --secondary-lavender: #ff00ff;
         --accent-sage: #00ff00;
         --border-color: #ffffff;
