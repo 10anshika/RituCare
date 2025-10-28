@@ -2,25 +2,25 @@
 
 /* CSS Variables for Theming */
 :root {
-    /* Modern Color Palette */
-    --primary-teal: #06d6a0;
-    --secondary-lavender: #8338ec;
-    --accent-sage: #f72585;
-    --accent-coral: #ff6b6b;
-    --neutral-cream: #ffffff;
-    --neutral-light: #f8f9ff;
-    --neutral-gray: #f1f3f4;
-    --neutral-dark: #1a1a2e;
-    --text-primary: #2d3436;
-    --text-secondary: #636e72;
-    --text-muted: #b2bec3;
-    --border-color: #e9ecef;
-    --glass-bg: rgba(255, 255, 255, 0.25);
-    --glass-border: rgba(255, 255, 255, 0.18);
-    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.04);
-    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.12);
-    --shadow-glow: 0 0 20px rgba(6, 214, 160, 0.3);
+    /* Professional Color Palette */
+    --primary-blue: #2563eb;
+    --secondary-gray: #6b7280;
+    --accent-blue: #3b82f6;
+    --accent-red: #ef4444;
+    --neutral-white: #ffffff;
+    --neutral-light: #f9fafb;
+    --neutral-gray: #f3f4f6;
+    --neutral-dark: #111827;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --border-color: #e5e7eb;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-strong: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 15px rgba(37, 99, 235, 0.2);
 
     /* Modern Spacing */
     --spacing-xs: 4px;
@@ -110,12 +110,12 @@ p {
 }
 
 a {
-    color: var(--primary-teal);
+    color: var(--primary-blue);
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--accent-sage);
+    color: var(--accent-blue);
     text-decoration: underline;
 }
 
@@ -137,7 +137,7 @@ header::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, var(--primary-teal) 0%, var(--accent-sage) 100%);
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
     opacity: 0.05;
     z-index: -1;
 }
@@ -157,7 +157,7 @@ header::before {
 .header-icon {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-sage));
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
     border-radius: var(--border-radius-lg);
     display: flex;
     align-items: center;
@@ -169,14 +169,14 @@ header::before {
 
 .header-icon:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(6, 214, 160, 0.4);
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
 }
 
 .header-text h1 {
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-extrabold);
     margin: 0;
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-sage));
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -218,14 +218,14 @@ nav {
 }
 
 .nav-tabs .nav-link:hover {
-    color: var(--primary-teal);
-    background: rgba(6, 214, 160, 0.1);
+    color: var(--primary-blue);
+    background: rgba(37, 99, 235, 0.1);
     transform: translateY(-2px);
 }
 
 .nav-tabs .nav-link.active {
-    color: var(--primary-teal);
-    background: linear-gradient(135deg, rgba(6, 214, 160, 0.1), rgba(247, 37, 133, 0.1));
+    color: var(--primary-blue);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1));
     font-weight: var(--font-weight-semibold);
     box-shadow: var(--shadow-medium);
 }
@@ -238,7 +238,7 @@ nav {
     transform: translateX(-50%);
     width: 30px;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary-teal), var(--accent-sage));
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
     border-radius: 2px;
 }
 
@@ -274,7 +274,7 @@ main {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-teal), var(--accent-sage));
+    background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
     opacity: 0;
     transition: var(--transition-normal);
 }
@@ -311,7 +311,7 @@ main {
 }
 
 .card-title i {
-    color: var(--primary-teal);
+    color: var(--primary-blue);
 }
 
 /* Modern Buttons */
@@ -349,7 +349,7 @@ main {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-sage));
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
     color: white;
     box-shadow: var(--shadow-medium);
 }
@@ -361,7 +361,7 @@ main {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--secondary-lavender), var(--accent-coral));
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
     color: white;
     box-shadow: var(--shadow-medium);
 }
@@ -374,13 +374,13 @@ main {
 
 .btn-outline-primary {
     background: transparent;
-    color: var(--primary-teal);
-    border: 2px solid var(--primary-teal);
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
     box-shadow: none;
 }
 
 .btn-outline-primary:hover {
-    background: var(--primary-teal);
+    background: var(--primary-blue);
     color: white;
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
@@ -411,8 +411,8 @@ main {
 }
 
 .form-control:focus {
-    border-color: var(--primary-teal);
-    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25);
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
 }
 
 .form-label {
@@ -422,8 +422,8 @@ main {
 }
 
 .form-check-input:checked {
-    background-color: var(--primary-teal);
-    border-color: var(--primary-teal);
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
 }
 
 .form-check-label {
@@ -438,7 +438,7 @@ main {
 }
 
 .progress-bar {
-    background-color: var(--primary-teal);
+    background-color: var(--primary-blue);
     border-radius: var(--border-radius);
 }
 
@@ -479,7 +479,7 @@ main {
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: var(--primary-teal);
+    background-color: var(--primary-blue);
     color: white;
 }
 
@@ -529,7 +529,7 @@ footer {
 .btn:focus,
 .form-control:focus,
 .form-check-input:focus {
-    outline: 2px solid var(--primary-teal);
+    outline: 2px solid var(--primary-blue);
     outline-offset: 2px;
 }
 

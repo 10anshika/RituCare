@@ -524,8 +524,10 @@ class RituCareApp {
             this.logPeriodModal.hide();
         }
 
+        // Force refresh of both calendars to show new period immediately
         this.loadTrackerData();
         this.loadDashboardData();
+
         this.showAlert('Period logged successfully!', 'success');
 
         // Clear form
