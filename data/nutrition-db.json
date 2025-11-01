@@ -1,0 +1,116 @@
+{
+  "menstrual": {
+    "recommended": [
+      "Iron-rich foods (spinach, red meat, lentils, pumpkin seeds)",
+      "Vitamin C foods (citrus fruits, bell peppers, strawberries)",
+      "Anti-inflammatory foods (ginger, turmeric, green tea)",
+      "Complex carbohydrates (whole grains, sweet potatoes, quinoa)",
+      "Magnesium-rich foods (nuts, seeds, dark chocolate, bananas)",
+      "Protein sources (eggs, fish, chicken, tofu)",
+      "Healthy fats (avocado, olive oil, fatty fish)"
+    ],
+    "avoid": [
+      "Caffeine (coffee, tea, chocolate, energy drinks)",
+      "Alcohol",
+      "Processed foods and refined sugars",
+      "Excessive salt and salty foods",
+      "Dairy products (if sensitive to cramps)",
+      "Artificial sweeteners",
+      "Trans fats and fried foods"
+    ],
+    "tips": [
+      "Stay hydrated with herbal teas and water",
+      "Focus on warming, nourishing foods",
+      "Include protein with every meal to stabilize blood sugar",
+      "Consider gentle exercise like walking or yoga",
+      "Get adequate rest and manage stress",
+      "Use heating pads for cramps if needed",
+      "Track iron intake to prevent anemia"
+    ]
+  },
+  "follicular": {
+    "recommended": [
+      "High-quality proteins (eggs, fish, lean meats, legumes)",
+      "Healthy fats (avocado, nuts, seeds, olive oil)",
+      "Colorful vegetables (leafy greens, broccoli, carrots)",
+      "Fresh fruits (berries, apples, citrus)",
+      "Whole grains (oats, brown rice, barley)",
+      "Fermented foods (yogurt, kefir, sauerkraut)",
+      "Antioxidant-rich foods (dark chocolate, green tea)"
+    ],
+    "avoid": [
+      "Excessive sugar and refined carbohydrates",
+      "Trans fats and processed foods",
+      "Artificial sweeteners and additives",
+      "Excessive caffeine",
+      "Alcohol in large amounts",
+      "High-mercury fish (if not already avoiding)"
+    ],
+    "tips": [
+      "Build energy with nutrient-dense foods",
+      "Include healthy fats for hormone production",
+      "Try new recipes and flavors",
+      "Focus on variety in your diet",
+      "Support liver detoxification with cruciferous vegetables",
+      "Include folate-rich foods for cell growth",
+      "Stay active with moderate exercise"
+    ]
+  },
+  "ovulatory": {
+    "recommended": [
+      "Antioxidant-rich foods (berries, dark leafy greens, tomatoes)",
+      "Healthy fats (seeds, nuts, fatty fish, avocado)",
+      "Whole grains and legumes",
+      "Colorful vegetables (bell peppers, carrots, squash)",
+      "Citrus fruits and vitamin C sources",
+      "Zinc-rich foods (pumpkin seeds, oysters, chickpeas)",
+      "Anti-inflammatory spices (turmeric, ginger, cinnamon)"
+    ],
+    "avoid": [
+      "Alcohol",
+      "Excessive caffeine",
+      "Processed foods and artificial additives",
+      "Trans fats",
+      "High-sugar foods",
+      "Environmental toxins (choose organic when possible)"
+    ],
+    "tips": [
+      "Focus on fertility-supporting nutrients",
+      "Include zinc-rich foods for reproductive health",
+      "Stay hydrated throughout the day",
+      "Enjoy light, fresh meals",
+      "Support antioxidant activity with colorful produce",
+      "Consider foods rich in CoQ10 (organ meats, fatty fish)",
+      "Practice stress-reduction techniques"
+    ]
+  },
+  "luteal": {
+    "recommended": [
+      "Complex carbohydrates (sweet potatoes, whole grains, legumes)",
+      "Magnesium-rich foods (dark chocolate, bananas, spinach, almonds)",
+      "Calcium-rich foods (kale, broccoli, dairy, fortified plant milks)",
+      "B vitamins (leafy greens, eggs, legumes, whole grains)",
+      "Healthy fats (avocado, nuts, seeds, olive oil)",
+      "Protein sources (chicken, fish, tofu, beans)",
+      "Vitamin D sources (fatty fish, fortified foods, sunlight)"
+    ],
+    "avoid": [
+      "Sugar and refined carbohydrates",
+      "Caffeine (especially if experiencing PMS)",
+      "Alcohol",
+      "Excessive salt and processed foods",
+      "Artificial sweeteners",
+      "Trans fats and fried foods"
+    ],
+    "tips": [
+      "Choose complex carbs to stabilize blood sugar",
+      "Include magnesium-rich foods for PMS relief",
+      "Practice mindful eating and stress management",
+      "Consider herbal teas for relaxation",
+      "Support progesterone production with healthy fats",
+      "Include vitamin B6-rich foods for mood support",
+      "Get adequate sleep and rest",
+      "Track PMS symptoms to identify patterns"
+    ]
+  }
+}

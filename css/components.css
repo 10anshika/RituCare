@@ -1,0 +1,486 @@
+/* RituCare - Component Styles */
+
+/* Calendar Component */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
+}
+
+.calendar-header {
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+    padding: var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.calendar-day:hover {
+    background-color: var(--neutral-light);
+}
+
+.calendar-day.today {
+    background-color: var(--primary-blue);
+    color: white;
+    font-weight: var(--font-weight-semibold);
+}
+
+.calendar-day.period {
+    background-color: #ef4444 !important;
+    color: white !important;
+}
+
+.calendar-day.predicted {
+    background-color: #f59e0b !important;
+    color: white !important;
+    opacity: 0.8;
+}
+
+.calendar-day.fertile {
+    border: 2px solid #10b981 !important;
+}
+
+/* Symptom Chips */
+.symptom-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.symptom-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--neutral-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.symptom-chip:hover {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+.symptom-chip.selected {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+/* Status Cards */
+.status-card {
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-sage));
+    color: white;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.status-card h3 {
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-xl);
+}
+
+.status-card p {
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* Risk Gauge */
+.risk-gauge {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.risk-gauge canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.quick-action-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    background-color: var(--neutral-light);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.quick-action-btn:hover {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Phase Indicator */
+.phase-indicator {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-transform: capitalize;
+}
+
+.phase-indicator.menstrual {
+    background-color: #ffeaa7;
+    color: #d63031;
+}
+
+.phase-indicator.follicular {
+    background-color: #a29bfe;
+    color: white;
+}
+
+.phase-indicator.ovulatory {
+    background-color: #fd79a8;
+    color: white;
+}
+
+.phase-indicator.luteal {
+    background-color: #6c5ce7;
+    color: white;
+}
+
+/* Nutrition Cards */
+.nutrition-card {
+    border-left: 4px solid var(--primary-blue);
+    background-color: var(--neutral-light);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--border-radius);
+}
+
+.nutrition-card.recommended {
+    border-left-color: #00b894;
+}
+
+.nutrition-card.avoid {
+    border-left-color: #e17055;
+}
+
+/* Meal Plan */
+.meal-plan {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.meal-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--neutral-light);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.meal-item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: var(--spacing-md);
+    font-size: var(--font-size-lg);
+}
+
+.meal-item-content h5 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.meal-item-content p {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Shopping List */
+.shopping-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.shopping-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.shopping-item:last-child {
+    border-bottom: none;
+}
+
+.shopping-item input[type="checkbox"] {
+    margin-right: var(--spacing-sm);
+}
+
+.shopping-item.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Assessment History */
+.assessment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--neutral-light);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+}
+
+.assessment-item .date {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.assessment-item .score {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-blue);
+}
+
+.assessment-item .level {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.assessment-item .level.low {
+    background-color: #55efc4;
+    color: #00b894;
+}
+
+.assessment-item .level.medium {
+    background-color: #ffeaa7;
+    color: #d63031;
+}
+
+.assessment-item .level.high {
+    background-color: #fd79a8;
+    color: #e84393;
+}
+
+/* Period Log */
+.period-log {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--neutral-light);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+}
+
+.period-log .dates {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.period-log .flow {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.period-log .flow.light {
+    background-color: #a29bfe;
+    color: white;
+}
+
+.period-log .flow.medium {
+    background-color: #fd79a8;
+    color: white;
+}
+
+.period-log .flow.heavy {
+    background-color: #e17055;
+    color: white;
+}
+
+.period-log .symptoms {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Loading States */
+.skeleton {
+    background: linear-gradient(90deg, var(--neutral-light) 25%, var(--border-color) 50%, var(--neutral-light) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: var(--border-radius);
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-text {
+    height: 1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.skeleton-text:last-child {
+    width: 60%;
+}
+
+.skeleton-card {
+    height: 120px;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background-color: var(--neutral-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    color: var(--text-primary);
+}
+
+.toast.success {
+    border-color: #00b894;
+}
+
+.toast.error {
+    border-color: #e17055;
+}
+
+.toast.warning {
+    border-color: #fdcb6e;
+}
+
+/* Empty States */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-secondary);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--border-color);
+    margin-bottom: var(--spacing-md);
+    display: block;
+}
+
+.empty-state h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .calendar {
+        grid-template-columns: repeat(7, 1fr);
+        font-size: var(--font-size-xs);
+    }
+
+    .quick-actions {
+        flex-direction: column;
+    }
+
+    .quick-action-btn {
+        min-width: auto;
+    }
+
+    .meal-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .meal-item-icon {
+        margin-right: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .assessment-item,
+    .period-log {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}
+
+/* Dark Mode Component Adjustments */
+[data-theme="dark"] .calendar-day.period {
+    background-color: #6c5ce7;
+}
+
+[data-theme="dark"] .calendar-day.predicted {
+    background-color: #a29bfe;
+    opacity: 0.8;
+}
+
+[data-theme="dark"] .phase-indicator.menstrual {
+    background-color: #2d3436;
+    color: #ffeaa7;
+}
+
+[data-theme="dark"] .nutrition-card {
+    background-color: var(--neutral-dark);
+}
+
+[data-theme="dark"] .meal-item,
+[data-theme="dark"] .assessment-item,
+[data-theme="dark"] .period-log {
+    background-color: var(--neutral-dark);
+    border-color: var(--border-color);
+}
