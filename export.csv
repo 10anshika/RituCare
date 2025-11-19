@@ -1,0 +1,4 @@
+user_id,date_start,date_end,flow,mood,cramps,acne,fatigue,cravings,sleep_hours,stress_level,water_glasses,symptoms,notes
+user1,2025-09-13,2025-09-18,3,Sad,,,,,,,,"Cramps, Acne",
+user1,2025-10-15,2025-10-20,4,Irritable,,,,,,,,"Acne, Fatigue",
+user1,2025-11-13,2025-11-18,3,Happy,,,,,,,,"Bloating, Back Pain",

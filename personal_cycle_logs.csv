@@ -1,0 +1,11 @@
+date_start,date_end,symptoms,mood,sleep_hours,stress,water_intake_glasses
+2025-10-01,2025-10-05,"cramps, bloating, fatigue",irritable,6.5,high,6
+2025-09-03,2025-09-07,"headache, tender breasts, cravings",moody,7.0,medium,8
+2025-08-06,2025-08-10,"mild cramps, back pain",calm,8.0,low,10
+2025-07-09,2025-07-13,"severe cramps, nausea, fatigue",anxious,5.5,high,5
+2025-06-11,2025-06-15,"bloating, mood swings",happy,7.5,low,9
+2025-05-14,2025-05-18,"light cramps, acne breakout",content,8.0,medium,7
+2025-04-16,2025-04-20,"heavy flow, fatigue, cravings",tired,6.0,medium,8
+2025-03-19,2025-03-23,"tender breasts, mild cramps",energetic,7.0,low,11
+2025-02-21,2025-02-25,"bloating, headache, irritability",frustrated,6.5,high,6
+2025-01-24,2025-01-28,"back pain, cravings, fatigue",calm,7.5,medium,9
