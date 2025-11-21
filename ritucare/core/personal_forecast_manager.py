@@ -3,9 +3,21 @@ from datetime import timedelta, datetime
 import numpy as np
 
 try:
- from ritucare.core.fine_tuning_model import fine_tuned_forecast
+    from statsmodels.tsa.arima.model import ARIMA
+except ImportError:
+    ARIMA = None
+
+try:
+    from prophet import Prophet
+    prophet_available = True
+except ImportError:
+    Prophet = None
+    prophet_available = False
+
+try:
+    from ritucare.core.fine_tuning_model import fine_tuned_forecast
 except Exception:
- fine_tuned_forecast = None
+    fine_tuned_forecast = None
 
 
 def compute_adaptive_cycle_length(df, start_col="Start"):
@@ -42,10 +54,29 @@ def compute_adaptive_cycle_length(df, start_col="Start"):
  return round(adaptive_cycle, 1), round(slope, 3)
 
 
-def get_next_period_prediction(personal_path="ritucare/data/personal_cycle_logs_filled.csv",
-                            logs_path="ritucare/logs/user_cycle_log.csv"):
+def forecast_cycle_length_arima(cycle_lengths, steps=1):
+    """
+    Forecast next cycle length using ARIMA model.
+    """
+    if ARIMA is None or len(cycle_lengths) < 3:
+        return None
+
+    try:
+        # Reset index to avoid unsupported index warnings
+        cycle_lengths = cycle_lengths.reset_index(drop=True)
+        # Fit ARIMA model (order can be tuned)
+        model = ARIMA(cycle_lengths, order=(1, 1, 1))
+        fitted_model = model.fit()
+        forecast = fitted_model.forecast(steps=steps)
+        return forecast.iloc[0] if hasattr(forecast, 'iloc') else forecast[0]
+    except Exception:
+        return None
+
+
+def get_next_period_prediction(personal_path="dataset/personal_cycle_logs_filled.csv",
+                            logs_path="logs/user_cycle_log.csv"):
  """
- Adaptive next-period prediction using trend-based cycle modeling.
+ Adaptive next-period prediction using trend-based cycle modeling and ARIMA for precision.
  """
  dfs = []
  for path in [personal_path, logs_path]:
@@ -68,8 +99,25 @@ def get_next_period_prediction(personal_path="ritucare/data/personal_cycle_logs_
 
  combined = combined.dropna(subset=["Start"]).sort_values("Start")
 
- # Compute adaptive cycle length
- adaptive_cycle, slope = compute_adaptive_cycle_length(combined)
+ # Compute cycle lengths
+ starts = combined["Start"]
+ cycle_lengths = starts.diff().dt.days.dropna()
+ cycle_lengths = cycle_lengths[(cycle_lengths >= 15) & (cycle_lengths <= 60)]
+
+ if cycle_lengths.empty:
+     # Fallback to default
+     final_cycle = 28
+     slope = 0
+ else:
+     # Use ARIMA for precise forecast if possible
+     arima_forecast = forecast_cycle_length_arima(cycle_lengths, steps=1)
+     if arima_forecast and 15 <= arima_forecast <= 60:
+         final_cycle = round(arima_forecast, 1)
+         slope = 0  # ARIMA handles trend internally
+     else:
+         # Fallback to adaptive
+         adaptive_cycle, slope = compute_adaptive_cycle_length(combined)
+         final_cycle = adaptive_cycle if adaptive_cycle else 28
 
  # Integrate fine-tuned model if available
  fine_tuned_cycle = None
@@ -81,11 +129,9 @@ def get_next_period_prediction(personal_path="ritucare/data/personal_cycle_logs_
      except Exception:
          fine_tuned_cycle = None
 
- # Blend adaptive and fine-tuned cycles
+ # Blend with fine-tuned if available
  if fine_tuned_cycle:
-     final_cycle = round(0.8 * adaptive_cycle + 0.2 * fine_tuned_cycle, 1)
- else:
-     final_cycle = adaptive_cycle
+     final_cycle = round(0.7 * final_cycle + 0.3 * fine_tuned_cycle, 1)
 
  # Determine last start and calculate prediction
  last_start = combined["Start"].iloc[-1]
@@ -101,7 +147,7 @@ def get_next_period_prediction(personal_path="ritucare/data/personal_cycle_logs_
  next_end = (pd.to_datetime(next_start) + timedelta(days=avg_period_length)).date()
 
  # Confidence scoring based on variation
- cycle_std = combined["Start"].diff().dt.days.std()
+ cycle_std = cycle_lengths.std() if not cycle_lengths.empty else None
  if cycle_std is None or np.isnan(cycle_std):
      confidence = "Low"
  elif cycle_std <= 2:
@@ -111,12 +157,25 @@ def get_next_period_prediction(personal_path="ritucare/data/personal_cycle_logs_
  else:
      confidence = "Low"
 
+ # Calculate possible range based on confidence and variation
+ cycle_std = cycle_lengths.std() if not cycle_lengths.empty else 5  # default std if no data
+ if confidence == "High":
+     range_days = max(1, int(cycle_std * 0.5))  # smaller range for high confidence
+ elif confidence == "Moderate":
+     range_days = max(2, int(cycle_std * 0.75))
+ else:
+     range_days = max(3, int(cycle_std))  # larger range for low confidence
+
+ possible_start_from = (last_start + timedelta(days=final_cycle - range_days)).date()
+ possible_start_to = (last_start + timedelta(days=final_cycle + range_days)).date()
+
  return {
      "next_start": next_start,
      "next_end": next_end,
      "adaptive_cycle_length": final_cycle,
      "trend_slope": slope,
-     "confidence": confidence
+     "confidence": confidence,
+     "possible_start_range": f"{possible_start_from} to {possible_start_to}"
  }
 
 

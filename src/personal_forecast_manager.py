@@ -3,9 +3,9 @@ from datetime import timedelta, datetime
 import numpy as np
 
 try:
-from ritucare.core.fine_tuning_model import fine_tuned_forecast
+    from ritucare.core.fine_tuning_model import fine_tuned_forecast
 except Exception:
- fine_tuned_forecast = None
+    fine_tuned_forecast = None
 
 
 def compute_adaptive_cycle_length(df, start_col="Start"):

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌸 RituCare: AI-Powered Menstrual Cycle & PCOS Wellness Assistant
 
 <div align="center">
@@ -479,3 +480,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [⬆️ Back to Top](#-ritucare-ai-powered-menstrual-cycle--pcos-wellness-assistant)
 
 </div>
+=======
+# RituCare
+>>>>>>> 614eb9724ac28fc8f96a16f6c308d209fa6db5c2

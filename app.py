@@ -520,7 +520,7 @@ if page == "🌸 Dashboard":
         # Run updated forecast function
         try:
             prediction = pfm.get_next_period_prediction()
-            next_period = f"{prediction['next_start']} - {prediction['next_end']}"
+            next_period = f"{prediction['next_start']} - {prediction['next_end']}<br><small>Possible start: {prediction['possible_start_range']}</small>"
         except Exception as e:
             next_period = "Log to predict"
         st.markdown(f'<div class="glass-card"><h4>📅 Next Period</h4><p>{next_period}</p></div>', unsafe_allow_html=True)
