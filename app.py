@@ -444,20 +444,38 @@ page = st.sidebar.radio("Navigation", ["🌸 Dashboard", "📝 Log Period", "�
 def get_cycle_day():
     if logs.empty:
         return None, "Log your first period to start tracking! 🌸"
+    
     # Filter out NaN date_start values (water tracker entries)
     valid_dates = logs['date_start'].dropna()
     if valid_dates.empty:
         return None, "Log your first period to start tracking! 🌸"
+    
     last_start = pd.to_datetime(valid_dates.max()).date()
-    cycle_day = get_cycle_day_func(last_start)
+    
+    # Calculate user's average cycle length
+    user_cycle_length = 28  # Default
+    if len(valid_dates) >= 2:
+        sorted_dates = pd.to_datetime(valid_dates).sort_values()
+        cycle_lengths = sorted_dates.diff().dt.days.dropna()
+        # Filter to reasonable range
+        cycle_lengths = cycle_lengths[(cycle_lengths >= 15) & (cycle_lengths <= 60)]
+        if not cycle_lengths.empty:
+            user_cycle_length = int(cycle_lengths.mean())
+    
+    # Calculate cycle day with personalized length
+    cycle_day = get_cycle_day_func(last_start, cycle_length=user_cycle_length)
+    
     if cycle_day:
-        return cycle_day, f"Today is Day {cycle_day} of your cycle 🌸"
+        if user_cycle_length != 28:
+            return cycle_day, f"Today is Day {cycle_day} of your {user_cycle_length}-day cycle 🌸"
+        else:
+            return cycle_day, f"Today is Day {cycle_day} of your cycle 🌸"
     else:
         return None, "Cycle complete! Log next period start. 💕"
 
-cycle_day, cycle_msg = get_cycle_day()
 
 if page == "🌸 Dashboard":
+    cycle_day, cycle_msg = get_cycle_day()
     st.markdown('<div class="header">Welcome to RituCare 🌸</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="glass-card"><h3>{cycle_msg}</h3></div>', unsafe_allow_html=True)
 
@@ -534,8 +552,18 @@ if page == "🌸 Dashboard":
 
     # Cycle progress
     if cycle_day:
-        progress = (cycle_day / 28) * 100
-        st.markdown(f'<div class="glass-card"><h4>Cycle Progress</h4><div class="progress-bar"><div class="progress-fill" style="width:{progress}%"></div></div><p>Day {cycle_day}/28</p></div>', unsafe_allow_html=True)
+        # Calculate user's average cycle length (same logic as above)
+        user_cycle_length = 28
+        valid_dates = logs['date_start'].dropna()
+        if len(valid_dates) >= 2:
+            sorted_dates = pd.to_datetime(valid_dates).sort_values()
+            cycle_lengths = sorted_dates.diff().dt.days.dropna()
+            cycle_lengths = cycle_lengths[(cycle_lengths >= 15) & (cycle_lengths <= 60)]
+            if not cycle_lengths.empty:
+                user_cycle_length = int(cycle_lengths.mean())
+        
+        progress = (cycle_day / user_cycle_length) * 100
+        st.markdown(f'<div class="glass-card"><h4>Cycle Progress</h4><div class="progress-bar"><div class="progress-fill" style="width:{progress}%"></div></div><p>Day {cycle_day}/{user_cycle_length}</p></div>', unsafe_allow_html=True)
 
 elif page == "📝 Log Period":
     st.markdown('<div class="header">Log Your Period 📝</div>', unsafe_allow_html=True)
